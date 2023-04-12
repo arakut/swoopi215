@@ -1,10 +1,14 @@
 import requests
 
 
-locations = ['Лондон', 'Аэропорт Шереметьево', 'Череповец']
-for place in locations:
-    url = f'https://wttr.in/{place}?nqmT&lang=ru'
-    response = requests.get(url)
-    response.raise_for_status()
-    print(response.text)
-    print('-'*75)
+def main(*locations):
+    for place in locations:
+        payload = {'nqmT': '', 'lang': 'ru'}
+        url = f'https://wttr.in/{place}'
+        response = requests.get(url, params=payload)
+        response.raise_for_status()
+        print(response.text)
+
+
+if __name__ == '__main__':
+    main('Лондон', 'Аэропорт Шереметьево', 'Череповец')
